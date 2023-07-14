@@ -8,7 +8,6 @@ import java.util.Objects;
 @Table(name = "tb_game_list")
 public class GameList {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,14 +38,19 @@ public class GameList {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof GameList gameList)) return false;
-        return id.equals(gameList.id);
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        GameList other = (GameList) obj;
+        return Objects.equals(id, other.id);
     }
 }
